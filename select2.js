@@ -2475,7 +2475,7 @@ the specific language governing permissions and limitations under the Apache Lic
                         this.unselect(selected.first());
                         this.search.width(10);
                         selectedChoice = next.length ? next : null;
-                    } else if (e.which == KEY.ENTER) {
+                    } else if (e.which === KEY.ENTER) {
                         selectedChoice = null;
                     }
 
@@ -2549,7 +2549,9 @@ the specific language governing permissions and limitations under the Apache Lic
 
             this.search.on("keyup", this.bind(function (e) {
                 this.keydowns = 0;
-                this.resizeSearch();
+                if (e.which !== KEY.ENTER) {
+                  this.resizeSearch();
+                }
             })
             );
 
@@ -2803,6 +2805,7 @@ the specific language governing permissions and limitations under the Apache Lic
 
             choice.data("select2-data", data);
             choice.insertBefore(this.searchContainer);
+            this.search.width(10);
 
             val.push(id);
             this.setVal(val);
